@@ -21,7 +21,4 @@ const geocode = (address, callback) => {
   });
 };
 
-geocode("Boston", (geoError, geoData) => {
-  console.log(geoError);
-  console.log(geoData);
-});
+module.exports = geocode;

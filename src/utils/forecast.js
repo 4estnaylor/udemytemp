@@ -20,16 +20,8 @@ const forecast = (latitude, longitude, callback) => {
           " deg F. It feels like " +
           body.current.feelslike +
           " deg F. Weather: " +
-          body.current.weather_descriptions[0]
+          body.current.weather_descritpions[0]
       );
-      // callback{
-      //     "The temperature is " + body.current.temperature + " deg F. It feels like " + body.current.feelslike + " deg F. Weather: " + body.current.weather_descritpions[0]
-      // }
     }
   });
 };
-
-forecast(40, -70, (forecastError, forecast) => {
-  console.log(forecastError);
-  console.log(forecast);
-});
