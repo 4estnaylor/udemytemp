@@ -15,13 +15,16 @@ const forecast = (latitude, longitude, callback) => {
       callback("could not find location for forecast, try again.", undefined);
     } else {
       callback(
+        undefined,
         "The temperature is " +
           body.current.temperature +
           " deg F. It feels like " +
           body.current.feelslike +
           " deg F. Weather: " +
-          body.current.weather_descritpions[0]
+          body.current.weather_descriptions[0]
       );
     }
   });
 };
+
+module.exports = forecast;

@@ -28,6 +28,32 @@ app.get("", (req, res) => {
   });
 });
 
+app.get("/weather", (req, res) => {
+  const address = req.query.address;
+  console.log(address);
+  //res.send("hello");
+  geocode(address, (geoError, geoData) => {
+    if (geoError) {
+      return res.send(geoError);
+    } else {
+      console.log(geoData.location);
+      forecast(
+        geoData.latitude,
+        geoData.longitude,
+        (forecastError, forecast) => {
+          if (forecastError) {
+            return res.send(forecastError);
+          }
+          res.send({
+            forecast,
+            location: geoData.location,
+          });
+        }
+      );
+    }
+  });
+});
+
 app.get("/help", (req, res) => {
   res.render("help", {
     title: "Help",
@@ -42,10 +68,19 @@ app.get("/about", (req, res) => {
   });
 });
 
+app.get("/help/*", (req, res) => {
+  res.render("404", {
+    title: "404 Error",
+    name: "Forrest Naylor",
+    message: "Could not find help article",
+  });
+});
+
 app.get("/*", (req, res) => {
   res.render("404", {
     title: "404 Error",
     name: "Forrest Naylor",
+    message: "Could not find page",
   });
 });
 
